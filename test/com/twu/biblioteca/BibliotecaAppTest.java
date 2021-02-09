@@ -1,13 +1,23 @@
 package com.twu.biblioteca;
 
 
+import com.twu.biblioteca.others.Constants;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import java.io.PrintStream;
+import static org.mockito.Mockito.*;
 
-public class ExampleTest {
+public class BibliotecaAppTest {
 
     @Test
-    public void test() {
-        assertEquals(1, 1);
+    public void shouldPrintGreetingMessage() {
+        PrintStream printStreamMock = mock(PrintStream.class);
+        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
+        bibliotecaCore.printGreetingMessage();
+        verify(printStreamMock).println(Constants.GREETING_MESSAGE);
+    }
+
+    @Test
+    public void shouldListAllBooksAfterGreetings(){
+
     }
 }
