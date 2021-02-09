@@ -5,6 +5,7 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaCore bibliotecaCore = new BibliotecaCore(System.out);
         bibliotecaCore.printGreetingMessage();
-        bibliotecaCore.printBookList();
+        bibliotecaCore.printAllBookTitles();
+        bibliotecaCore.printAllBooksCompleteInfo();
     }
 }
