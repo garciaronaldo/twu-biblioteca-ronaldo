@@ -12,6 +12,7 @@ public class Constants {
         books.add(new NewMoon());
         books.add(new Eclipse());
         books.add(new BreakingDawn());
+        books.add(new MidnightSun());
         books.add(new Iracema());
         books.add(new OCortico());
         books.add(new VidasSecas());
