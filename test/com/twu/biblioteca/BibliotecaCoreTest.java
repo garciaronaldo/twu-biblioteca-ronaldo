@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.others.Book;
 import com.twu.biblioteca.others.Constants;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -13,12 +14,16 @@ import static org.mockito.Mockito.*;
 public class BibliotecaCoreTest {
 
     private final List<Book> books = Constants.getAllBooks();
+    private PrintStream printStreamMock;
+    private BibliotecaCore bibliotecaCore;
 
+    @Before
+    public void setUp(){
+        this.printStreamMock = mock(PrintStream.class);
+        this.bibliotecaCore = new BibliotecaCore(printStreamMock);
+    }
     @Test
     public void shouldPrintGreetingMessage() {
-        PrintStream printStreamMock = mock(PrintStream.class);
-        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
-
         bibliotecaCore.printGreetingMessage();
 
         verify(printStreamMock).println(Constants.GREETING_MESSAGE);
@@ -26,9 +31,6 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldListAllBooks(){
-        PrintStream printStreamMock = mock(PrintStream.class);
-        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
-
         bibliotecaCore.printAllBookTitles();
 
         books.forEach((Book book) -> verify(printStreamMock).println(book.getTitle()));
@@ -36,9 +38,6 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldListAllBooksWithAuthorAndPublicationYear(){
-        PrintStream printStreamMock = mock(PrintStream.class);
-        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
-
         bibliotecaCore.printAllBooksCompleteInfo();
 
         books.forEach((Book book) -> {
@@ -50,8 +49,6 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldDisplayMenuWithOptions(){
-        PrintStream printStreamMock = mock(PrintStream.class);
-        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
         String selectedOption = "1";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
@@ -63,8 +60,6 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldShowInvalidOptionMessageInMenu(){
-        PrintStream printStreamMock = mock(PrintStream.class);
-        BibliotecaCore bibliotecaCore = new BibliotecaCore(printStreamMock);
         String selectedOption = "9\n1";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
@@ -73,5 +68,17 @@ public class BibliotecaCoreTest {
         verify(printStreamMock, times(1)).println(Constants.MENU_TITLE);
         verify(printStreamMock, times(1)).println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
         verify(printStreamMock, times(1)).println(Constants.MENU_INVALID_OPTION);
+    }
+
+    @Test
+    public void shouldQuitWhenQuitOptionIsSelected(){
+        String selectedOption = "0";
+        System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
+
+        bibliotecaCore.printMenu();
+
+        verify(printStreamMock, times(1)).println(Constants.MENU_TITLE);
+        verify(printStreamMock, times(1)).println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
+        verify(printStreamMock, times(1)).println(Constants.MENU_GOODBYE);
     }
 }

@@ -48,6 +48,7 @@ public class BibliotecaCore {
         printStream.println(Constants.MENU_TITLE);
         printStream.println(Constants.MENU_LINE);
         printStream.println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
+        printStream.print(Constants.MENU_QUIT_OPTION);
     }
 
     private void showMenuOptions(Scanner input) {
@@ -56,6 +57,9 @@ public class BibliotecaCore {
         switch (choice){
             case 1:
                 printAllBookTitles();
+                break;
+            case 0:
+                printStream.println(Constants.MENU_GOODBYE);
                 break;
             default:
                 printStream.println(Constants.MENU_INVALID_OPTION);

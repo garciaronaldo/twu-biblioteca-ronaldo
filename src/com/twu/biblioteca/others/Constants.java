@@ -8,6 +8,8 @@ public class Constants {
     public static final String MENU_LINE = "----------------------";
     public static final String MENU_FIRST_OPTION_LIST_OF_BOOKS = "1 - List of books";
     public static final String MENU_INVALID_OPTION = "Please select a valid option!";
+    public static final String MENU_GOODBYE = "Thanks for using Biblioteca!";
+    public static final String MENU_QUIT_OPTION = "0 - Quit";
 
     public static List<Book> getAllBooks(){
         List<Book> books = new ArrayList<>();
