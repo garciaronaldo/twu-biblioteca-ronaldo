@@ -1,22 +1,25 @@
 package com.twu.biblioteca.others;
-import com.twu.biblioteca.books.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Constants {
-    public static String GREETING_MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+    public static final String GREETING_MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+    public static final String MENU_TITLE = "Please choose an option: ";
+    public static final String MENU_LINE = "----------------------";
+    public static final String MENU_FIRST_OPTION_LIST_OF_BOOKS = "1 - List of books";
+    public static final String MENU_INVALID_OPTION = "Please select a valid option!";
 
-    public static List<IBook> getAllBooks(){
-        List<IBook> books = new ArrayList<>();
-        books.add(new Twilight());
-        books.add(new NewMoon());
-        books.add(new Eclipse());
-        books.add(new BreakingDawn());
-        books.add(new MidnightSun());
-        books.add(new Iracema());
-        books.add(new OCortico());
-        books.add(new VidasSecas());
-        books.add(new FelizAnoVelho());
+    public static List<Book> getAllBooks(){
+        List<Book> books = new ArrayList<>();
+        books.add(new Book("Twilight", "Stephenie Meyer", 2005));
+        books.add(new Book("New Moon", "Stephenie Meyer", 2006));
+        books.add(new Book("Eclipse", "Stephenie Meyer",2007));
+        books.add(new Book("Breaking Dawn", "Stephenie Meyer", 2008));
+        books.add(new Book("Midnight Sun", "Stephenie Meyer", 2020));
+        books.add(new Book("Iracema", "José de Alencar", 1865));
+        books.add(new Book("O Cortiço", "Aluísio Azevedo", 1890));
+        books.add(new Book("Vidas Secas", "Graciliano Ramos", 1938));
+        books.add(new Book("Feliz Ano Velho", "Marcelo Rubens Paiva", 1982));
         return books;
     }
 }
