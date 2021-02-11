@@ -111,4 +111,17 @@ public class BibliotecaCoreTest {
         verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_CHECKOUT + "Twilight");
         verify(printStreamMock, times(1)).println(Constants.MENU_POST_CHECKOUT_MESSAGE);
     }
+
+    @Test
+    public void shouldPrintWarningMessageWhenBookIsNotAvailableForCheckout(){
+        String selectedOption = "2\nHarry Potter";
+        System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
+
+        bibliotecaCore.printMenu();
+
+        verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
+        verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
+        verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
+        verify(printStreamMock, times(1)).println(Constants.MENU_UNAVAILABLE_BOOK);
+    }
 }

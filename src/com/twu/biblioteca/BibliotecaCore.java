@@ -70,7 +70,6 @@ public class BibliotecaCore {
             case 2:
                 printStream.println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
                 checkoutBook();
-                printStream.println(Constants.MENU_POST_CHECKOUT_MESSAGE);
                 break;
             case 0:
                 printStream.println(Constants.MENU_GOODBYE);
@@ -85,11 +84,13 @@ public class BibliotecaCore {
         input.nextLine();
         String bookTitleToBeCheckedOut = input.nextLine();
         for(Book book : books){
-            if(book.getTitle().equals(bookTitleToBeCheckedOut)){
+            if(book.getTitle().equals(bookTitleToBeCheckedOut) && book.isBookAvailable()){
                 book.checkOutBook();
                 printStream.println(Constants.MENU_SUCCESSFUL_CHECKOUT + book.getTitle());
-                break;
+                printStream.println(Constants.MENU_POST_CHECKOUT_MESSAGE);
+                return;
             }
         }
+        printStream.println(Constants.MENU_UNAVAILABLE_BOOK);
     }
 }

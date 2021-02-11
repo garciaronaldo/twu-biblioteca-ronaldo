@@ -13,6 +13,7 @@ public class Constants {
     public static final String MENU_INVALID_OPTION = "Please select a valid option!";
     public static final String MENU_SUCCESSFUL_CHECKOUT = "Successfully checked out "; //Insert book title in sequence
     public static final String MENU_POST_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
+    public static final String MENU_UNAVAILABLE_BOOK = "Sorry, that book is not available";
     public static final String MENU_GOODBYE = "Thanks for using Biblioteca!";
 
     public static List<Book> getAllBooks(){
