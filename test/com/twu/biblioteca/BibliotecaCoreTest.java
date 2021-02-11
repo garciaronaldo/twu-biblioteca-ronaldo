@@ -34,14 +34,14 @@ public class BibliotecaCoreTest {
     public void shouldListAllBooks(){
         bibliotecaCore.printAllAvailableBookTitles();
 
-        books.forEach((Book book) -> verify(printStreamMock).println(book.getTitle()));
+        books.forEach(book -> verify(printStreamMock).println(book.getTitle()));
     }
 
     @Test
     public void shouldListAllBooksWithAuthorAndPublicationYear(){
         bibliotecaCore.printAllBooksCompleteInfo();
 
-        books.forEach((Book book) -> {
+        books.forEach(book -> {
             verify(printStreamMock).println(book.getTitle());
             verify(printStreamMock, atLeastOnce()).println(book.getAuthor());
             verify(printStreamMock, atLeastOnce()).println(book.getPublicationYear());
@@ -53,7 +53,7 @@ public class BibliotecaCoreTest {
         String selectedOption = "0";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
         verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock, times(1)).println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
@@ -63,13 +63,13 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldShowInvalidOptionMessageInMenu(){
-        String selectedOption = "9\n0";
+        String selectedOption = "9\nTrue\n0";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
-        verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
-        verify(printStreamMock, times(1)).println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
+        verify(printStreamMock, times(2)).println(Constants.MENU_INTRODUCTION);
+        verify(printStreamMock, times(2)).println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
         verify(printStreamMock, times(1)).println(Constants.MENU_INVALID_OPTION);
     }
 
@@ -78,7 +78,7 @@ public class BibliotecaCoreTest {
         String selectedOption = "0";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
         verify(printStreamMock).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock).println(Constants.MENU_LAST_OPTION_QUIT);
@@ -87,10 +87,10 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldCheckoutBook(){
-        String selectedOption = "2\nTwilight";
+        String selectedOption = "2\nTwilight\nFalse";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
         verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
@@ -100,10 +100,10 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldPrintMessageAfterBookCheckout(){
-        String selectedOption = "2\nTwilight";
+        String selectedOption = "2\nTwilight\nFalse";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
         verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
@@ -114,14 +114,29 @@ public class BibliotecaCoreTest {
 
     @Test
     public void shouldPrintWarningMessageWhenBookIsNotAvailableForCheckout(){
-        String selectedOption = "2\nHarry Potter";
+        String selectedOption = "2\nHarry Potter\nFalse";
         System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
 
-        bibliotecaCore.printMenu();
+        bibliotecaCore.startBiblioteca();
 
         verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
         verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
         verify(printStreamMock, times(1)).println(Constants.MENU_UNAVAILABLE_BOOK);
+    }
+
+    @Test
+    public void shouldReturnBook(){
+        String selectedOption = "2\nIracema\nTrue\n3\nIracema\nFalse";
+        System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
+
+        bibliotecaCore.startBiblioteca();
+
+        verify(printStreamMock, times(2)).println(Constants.MENU_INTRODUCTION);
+        verify(printStreamMock, times(2)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
+        verify(printStreamMock, times(2)).println(Constants.MENU_THIRD_OPTION_RETURN);
+        verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
+        verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_CHECKOUT + "Iracema");
+        verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_RETURN + "Iracema");
     }
 }

@@ -8,12 +8,16 @@ public class Constants {
     public static final String MENU_LINE = "------------------------------";
     public static final String MENU_FIRST_OPTION_LIST_OF_BOOKS = "1 - List of available books";
     public static final String MENU_SECOND_OPTION_CHECKOUT = "2 - Checkout book";
+    public static final String MENU_THIRD_OPTION_RETURN = "3 - Return book";
     public static final String MENU_LAST_OPTION_QUIT = "0 - Quit";
     public static final String MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT = "Please insert the title of the book you want to check out:";
+    public static final String MENU_INSERT_BOOK_TITLE_TO_BE_RETURNED = "Please insert the title of the book you want to return:";
     public static final String MENU_INVALID_OPTION = "Please select a valid option!";
-    public static final String MENU_SUCCESSFUL_CHECKOUT = "Successfully checked out "; //Insert book title in sequence
+    public static final String MENU_SUCCESSFUL_CHECKOUT = "Successfully checked out the book "; //Insert book title in sequence
     public static final String MENU_POST_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
     public static final String MENU_UNAVAILABLE_BOOK = "Sorry, that book is not available";
+    public static final String MENU_SUCCESSFUL_RETURN = "Successfully returned the book "; //Insert book title in sequence
+    public static final String MENU_CONTINUE = "Continue using Biblioteca? [True/False]";
     public static final String MENU_GOODBYE = "Thanks for using Biblioteca!";
 
     public static List<Book> getAllBooks(){

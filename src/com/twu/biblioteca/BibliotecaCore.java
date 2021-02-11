@@ -19,16 +19,20 @@ public class BibliotecaCore {
 
     public void startBiblioteca(){
         printGreetingMessage();
-        printMenu();
+        startMenu();
     }
 
     public void printGreetingMessage(){
         printStream.println(Constants.GREETING_MESSAGE);
     }
 
+    public void startMenu() {
+        this.input = new Scanner(System.in);
+        printMenu();
+    }
+
     public void printMenu() {
         printAllMenuOptions();
-        this.input = new Scanner(System.in);
         chooseOptions();
     }
 
@@ -56,6 +60,7 @@ public class BibliotecaCore {
         printStream.println(Constants.MENU_LINE);
         printStream.println(Constants.MENU_FIRST_OPTION_LIST_OF_BOOKS);
         printStream.println(Constants.MENU_SECOND_OPTION_CHECKOUT);
+        printStream.println(Constants.MENU_THIRD_OPTION_RETURN);
         printStream.println(Constants.MENU_LAST_OPTION_QUIT);
     }
 
@@ -65,19 +70,22 @@ public class BibliotecaCore {
         switch (choice){
             case 1:
                 printAllAvailableBookTitles();
-                printAllMenuOptions();
-                chooseOptions();
+                break;
             case 2:
                 printStream.println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
                 checkoutBook();
                 break;
+            case 3:
+                printStream.println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_RETURNED);
+                returnBook();
+                break;
             case 0:
                 printStream.println(Constants.MENU_GOODBYE);
-                break;
+                return;
             default:
                 printStream.println(Constants.MENU_INVALID_OPTION);
-                chooseOptions();
         }
+        shouldContinueAfterChoosingAnOption();
     }
 
     private void checkoutBook() {
@@ -92,5 +100,29 @@ public class BibliotecaCore {
             }
         }
         printStream.println(Constants.MENU_UNAVAILABLE_BOOK);
+    }
+
+    private void returnBook() {
+        input.nextLine();
+        String bookTitleToBeReturned = input.nextLine();
+        for(Book book : books){
+            if(book.getTitle().equals(bookTitleToBeReturned) && !book.isBookAvailable()){
+                book.checkOutBook();
+                printStream.println(Constants.MENU_SUCCESSFUL_RETURN + book.getTitle());
+                break;
+            }
+        }
+    }
+
+    private void shouldContinueAfterChoosingAnOption() {
+        printStream.println(Constants.MENU_CONTINUE);
+        boolean newChoice = input.nextBoolean();
+        if(newChoice == true){
+            printMenu();
+        }
+        else{
+            printStream.println(Constants.MENU_GOODBYE);
+            return;
+        }
     }
 }
