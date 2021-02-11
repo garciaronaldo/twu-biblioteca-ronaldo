@@ -12,6 +12,7 @@ public class Constants {
     public static final String MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT = "Please insert the title of the book you want to check out:";
     public static final String MENU_INVALID_OPTION = "Please select a valid option!";
     public static final String MENU_SUCCESSFUL_CHECKOUT = "Successfully checked out "; //Insert book title in sequence
+    public static final String MENU_POST_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
     public static final String MENU_GOODBYE = "Thanks for using Biblioteca!";
 
     public static List<Book> getAllBooks(){

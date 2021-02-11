@@ -70,6 +70,7 @@ public class BibliotecaCore {
             case 2:
                 printStream.println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
                 checkoutBook();
+                printStream.println(Constants.MENU_POST_CHECKOUT_MESSAGE);
                 break;
             case 0:
                 printStream.println(Constants.MENU_GOODBYE);
