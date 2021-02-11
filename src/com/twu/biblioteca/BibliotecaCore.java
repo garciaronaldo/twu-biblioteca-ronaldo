@@ -109,6 +109,7 @@ public class BibliotecaCore {
             if(book.getTitle().equals(bookTitleToBeReturned) && !book.isBookAvailable()){
                 book.checkOutBook();
                 printStream.println(Constants.MENU_SUCCESSFUL_RETURN + book.getTitle());
+                printStream.println(Constants.MENU_POST_RETURN_MESSAGE);
                 break;
             }
         }

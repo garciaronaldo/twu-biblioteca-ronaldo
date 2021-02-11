@@ -139,4 +139,20 @@ public class BibliotecaCoreTest {
         verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_CHECKOUT + "Iracema");
         verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_RETURN + "Iracema");
     }
+
+    @Test
+    public void shouldPrintMessageAfterReturningBook(){
+        String selectedOption = "2\nIracema\nTrue\n3\nIracema\nFalse";
+        System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
+
+        bibliotecaCore.startBiblioteca();
+
+        verify(printStreamMock, times(2)).println(Constants.MENU_INTRODUCTION);
+        verify(printStreamMock, times(2)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
+        verify(printStreamMock, times(2)).println(Constants.MENU_THIRD_OPTION_RETURN);
+        verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
+        verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_CHECKOUT + "Iracema");
+        verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_RETURN + "Iracema");
+        verify(printStreamMock, times(1)).println(Constants.MENU_POST_RETURN_MESSAGE);
+    }
 }

@@ -17,6 +17,7 @@ public class Constants {
     public static final String MENU_POST_CHECKOUT_MESSAGE = "Thank you! Enjoy the book.";
     public static final String MENU_UNAVAILABLE_BOOK = "Sorry, that book is not available";
     public static final String MENU_SUCCESSFUL_RETURN = "Successfully returned the book "; //Insert book title in sequence
+    public static final String MENU_POST_RETURN_MESSAGE = "Thank you for returning the book.";
     public static final String MENU_CONTINUE = "Continue using Biblioteca? [True/False]";
     public static final String MENU_GOODBYE = "Thanks for using Biblioteca!";
 
