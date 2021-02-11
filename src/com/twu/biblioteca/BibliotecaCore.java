@@ -99,7 +99,7 @@ public class BibliotecaCore {
                 return;
             }
         }
-        printStream.println(Constants.MENU_UNAVAILABLE_BOOK);
+        printStream.println(Constants.MENU_UNAVAILABLE_BOOK_FOR_CHECK_OUT);
     }
 
     private void returnBook() {
@@ -113,6 +113,7 @@ public class BibliotecaCore {
                 break;
             }
         }
+        printStream.println(Constants.MENU_NOT_VALID_BOOK_FOR_RETURN);
     }
 
     private void shouldContinueAfterChoosingAnOption() {

@@ -122,7 +122,7 @@ public class BibliotecaCoreTest {
         verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
         verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
         verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_CHECKED_OUT);
-        verify(printStreamMock, times(1)).println(Constants.MENU_UNAVAILABLE_BOOK);
+        verify(printStreamMock, times(1)).println(Constants.MENU_UNAVAILABLE_BOOK_FOR_CHECK_OUT);
     }
 
     @Test
@@ -154,5 +154,18 @@ public class BibliotecaCoreTest {
         verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_CHECKOUT + "Iracema");
         verify(printStreamMock, times(1)).println(Constants.MENU_SUCCESSFUL_RETURN + "Iracema");
         verify(printStreamMock, times(1)).println(Constants.MENU_POST_RETURN_MESSAGE);
+    }
+
+    @Test
+    public void shouldPrintWarningMessageWhenBookCanNotBeReturned(){
+        String selectedOption = "3\nHarry Potter\nFalse";
+        System.setIn(new ByteArrayInputStream(selectedOption.getBytes()));
+
+        bibliotecaCore.startBiblioteca();
+
+        verify(printStreamMock, times(1)).println(Constants.MENU_INTRODUCTION);
+        verify(printStreamMock, times(1)).println(Constants.MENU_SECOND_OPTION_CHECKOUT);
+        verify(printStreamMock, times(1)).println(Constants.MENU_INSERT_BOOK_TITLE_TO_BE_RETURNED);
+        verify(printStreamMock, times(1)).println(Constants.MENU_NOT_VALID_BOOK_FOR_RETURN);
     }
 }
