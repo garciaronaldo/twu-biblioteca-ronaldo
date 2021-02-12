@@ -107,10 +107,10 @@ public class BibliotecaCore {
         String bookTitleToBeReturned = input.nextLine();
         for(Book book : books){
             if(book.getTitle().equals(bookTitleToBeReturned) && !book.isBookAvailable()){
-                book.checkOutBook();
+                book.returnBook();
                 printStream.println(Constants.MENU_SUCCESSFUL_RETURN + book.getTitle());
                 printStream.println(Constants.MENU_POST_RETURN_MESSAGE);
-                break;
+                return;
             }
         }
         printStream.println(Constants.MENU_NOT_VALID_BOOK_FOR_RETURN);
